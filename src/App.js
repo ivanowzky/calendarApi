@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import TaskForm from './components/TaskForm';
 
 function App() {
 
@@ -9,8 +9,8 @@ function App() {
   /* 
     Update with your own Client Id and Api key 
   */
-  var CLIENT_ID = ""
-  var API_KEY = ""
+  var CLIENT_ID = "476809100464-s3gcun2e8evenk24o3u2l6gu383mjnsa.apps.googleusercontent.com"
+  var API_KEY = "AIzaSyCcEyLdXZTKAIKL5XKV9cB111p2hWWG_Vc"
   var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
   var SCOPES = "https://www.googleapis.com/auth/calendar.events"
 
@@ -35,19 +35,19 @@ function App() {
           'location': '800 Howard St., San Francisco, CA 94103',
           'description': 'Really great refreshments',
           'start': {
-            'dateTime': '2020-06-28T09:00:00-07:00',
+            'dateTime': '2021-06-10T09:00:00-07:00',
             'timeZone': 'America/Los_Angeles'
           },
           'end': {
-            'dateTime': '2020-06-28T17:00:00-07:00',
+            'dateTime': '2021-06-10T17:00:00-07:00',
             'timeZone': 'America/Los_Angeles'
           },
           'recurrence': [
             'RRULE:FREQ=DAILY;COUNT=2'
           ],
           'attendees': [
-            {'email': 'lpage@example.com'},
-            {'email': 'sbrin@example.com'}
+            {'email': 'meneaeso@gmail.com'},
+            {'email': 'ivanovpsy@yahoo.com'},
           ],
           'reminders': {
             'useDefault': false,
@@ -57,7 +57,8 @@ function App() {
             ]
           }
         }
-
+        console.log(event.summary);
+          
         var request = gapi.client.calendar.events.insert({
           'calendarId': 'primary',
           'resource': event,
@@ -67,12 +68,13 @@ function App() {
           console.log(event)
           window.open(event.htmlLink)
         })
+         
         
 
         /*
             Uncomment the following block to get events
         */
-        /*
+        
         // get events
         gapi.client.calendar.events.list({
           'calendarId': 'primary',
@@ -85,7 +87,7 @@ function App() {
           const events = response.result.items
           console.log('EVENTS: ', events)
         })
-        */
+        
     
 
       })
@@ -97,11 +99,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <TaskForm/>
         <p>Click to add event to Google Calendar</p>
         <p style={{fontSize: 18}}>Uncomment the get events code to get events</p>
         <p style={{fontSize: 18}}>Don't forget to add your Client Id and Api key</p>
         <button style={{width: 100, height: 50}} onClick={handleClick}>Add Event</button>
       </header>
+   
     </div>
   );
 }
